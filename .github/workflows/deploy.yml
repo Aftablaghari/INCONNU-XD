@@ -13,18 +13,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up Python (or Node.js, depending on your bot)
-        uses: actions/setup-python@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.11'
+          node-version: '18'  # or use your specific version
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: npm install
 
       - name: Run the bot (with timeout)
         run: |
           echo "Bot started..."
-          timeout 3540 python3 bot.py  # 59 minutes
+          timeout 3540 node index.js
           echo "Bot ended. Restarting..."
 
       - name: Trigger next run
