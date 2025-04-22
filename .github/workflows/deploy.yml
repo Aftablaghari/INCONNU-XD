@@ -1,31 +1,31 @@
-name: 24/7 Bot Runner
+name: Node.js Bot 24/7 Runner
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # fallback: runs every hour
+    - cron: '0 * * * *'
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # or use your specific version
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run the bot (with timeout)
+      - name: Start application (runs for 59 minutes)
         run: |
-          echo "Bot started..."
-          timeout 3540 node index.js
-          echo "Bot ended. Restarting..."
+          echo "Starting bot..."
+          timeout 3540 npm start
+          echo "Bot stopped."
 
       - name: Trigger next run
         env:
